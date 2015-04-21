@@ -29,7 +29,7 @@ int main () {
     Print every grid (i.e. 0, 1, 2, 3, ... 12)
     */
     Life<AbstractCell> l1(cin);
-    // l1.run_evolution(12);
+    l1.run_evolution(12);
 
     // -----------------
     // Conway Cell 20x29

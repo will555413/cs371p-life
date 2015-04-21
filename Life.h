@@ -8,7 +8,7 @@
 using namespace std;
 
 class AbstractCell{
-public:
+protected:
 	bool state;
 public:
 	// initialize state as true/alive or false/dead depending on the input S
@@ -85,22 +85,35 @@ public:
 		string type;// decides what type of cell we'll be incorporating
 		input>>type;
 		input>>r>>c;
-		bool conway = (type == "ConwayCell");
+		// bool conway = (type == "ConwayCell");
 		// cout<<"Type: "<<type<<endl<<r<<" rows"<<endl<<c<<" columns"<<endl;
 		for(int i = 0; i<r; ++i){
 			grid.push_back(vector<T*>());
 			for(int j = 0; j<c; ++j){
 				char temp;
 				input>>temp;
-				if(temp != '.' && temp != '-')
+
+				if(isAlive(temp))
 					++population;
 
-				if(conway)
+				if(isConway(temp))
 					grid[i].push_back(new Conway(temp));
 				else
 					grid[i].push_back(new Fredkin(temp));
 			}
 		}	
+	}
+
+	bool isConway(char S){
+		if(S == '*' || S == '.')
+			return true;
+		return false;
+	}
+
+	bool isAlive(char S){
+		if(S != '.' && S != '-')
+			return true;
+		return false;
 	}
 
 	void run_evolution(int generations){
@@ -146,7 +159,7 @@ public:
 				to_change->shift_state();
 				// if the state after shifting is alive, ++population, otherwise --population
 				char temp = to_change->get_state();
-				if(temp != '.' && temp != '-')
+				if(isAlive(temp))
 					++population;
 				else
 					--population;

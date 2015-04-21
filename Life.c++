@@ -21,7 +21,7 @@ Conway::Conway(char S): AbstractCell(S) {}
 bool Conway::evolve(AbstractCell** const neighbors){
 	int count = 0;
 	for(int i = 0; i<=7; ++i){
-		if(neighbors[i] != NULL && neighbors[i]->state)
+		if(neighbors[i] != NULL && dynamic_cast<Conway*>(neighbors[i])->state)
 			++count;
 	}
 	assert(count >= 0 && count <= 7);
@@ -55,13 +55,13 @@ Fredkin::Fredkin(char S): AbstractCell(S){
 
 bool Fredkin::evolve(AbstractCell** const neighbors){
 	int count = 0;
-	if(neighbors[1] != NULL && neighbors[1]->state)
+	if(neighbors[1] != NULL && dynamic_cast<Fredkin*>(neighbors[1])->state)
 		++count;
-	if(neighbors[3] != NULL && neighbors[3]->state)
+	if(neighbors[3] != NULL && dynamic_cast<Fredkin*>(neighbors[3])->state)
 		++count;
-	if(neighbors[4] != NULL && neighbors[4]->state)
+	if(neighbors[4] != NULL && dynamic_cast<Fredkin*>(neighbors[4])->state)
 		++count;
-	if(neighbors[6] != NULL && neighbors[6]->state)
+	if(neighbors[6] != NULL && dynamic_cast<Fredkin*>(neighbors[6])->state)
 		++count;
 	assert(count >= 0 && count <= 4);
 
