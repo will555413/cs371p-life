@@ -17,8 +17,6 @@ void AbstractCell::shift_state(){state = !state;}
 
 bool AbstractCell::isAlive(){ return state;}
 
-AbstractCell* AbstractCell::get_pointer(){return this;}
-
 // -----------
 // Conway Cell
 // -----------
@@ -148,6 +146,6 @@ bool Cell::isAlive(){
 	return _p->isAlive();
 }
 
-AbstractCell* Cell::get_pointer(){
+AbstractCell* Cell::operator & (){
 	return _p;
 }

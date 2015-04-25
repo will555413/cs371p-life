@@ -56,16 +56,6 @@ TEST(Life, AbstractCell_IsAlive4) {
 	ASSERT_FALSE(f.isAlive());
 }
 
-TEST(Life, AbstractCell_GetPointer1) {
-	ConwayCell c('*');
-	ASSERT_EQ(c.get_pointer(), &c);
-}
-
-TEST(Life, AbstractCell_GetPointer2) {
-	FredkinCell f('*');
-	ASSERT_EQ(f.get_pointer(), &f);
-}
-
 // -----------
 // ConwayCell Cell
 // -----------
@@ -248,71 +238,71 @@ TEST(Life, FredkinCell_GetState3) {
 TEST(Life, Cell_CharConstructor1) {
 	Cell c('*');
 	ASSERT_EQ(c.get_state(), '*');
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c));
 }
 
 TEST(Life, Cell_CharConstructor2) {
 	Cell c('.');
 	ASSERT_EQ(c.get_state(), '.');
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c));
 }
 
 TEST(Life, Cell_CharConstructor3) {
 	Cell c('0');
 	ASSERT_EQ(c.get_state(), '0');
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c));
 }
 
 TEST(Life, Cell_CharConstructor4) {
 	Cell c('-');
 	ASSERT_EQ(c.get_state(), '-');
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c));
 }
 
 TEST(Life, Cell_CopyConstructor1) {
 	Cell c1('*');
 	ASSERT_EQ(c1.get_state(), '*');
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c1));
 	Cell c2(c1);
 	ASSERT_EQ(c2.get_state(), c1.get_state());
-	ASSERT_NE(c2.get_pointer(), c1.get_pointer());
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c2.get_pointer()));
+	ASSERT_NE(&c2, &c1);
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c2));
 }
 
 TEST(Life, Cell_CopyConstructor2) {
 	Cell c1('0');
 	ASSERT_EQ(c1.get_state(), '0');
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c1));
 	Cell c2(c1);
 	ASSERT_EQ(c2.get_state(), c1.get_state());
-	ASSERT_NE(c2.get_pointer(), c1.get_pointer());
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c2.get_pointer()));
+	ASSERT_NE(&c2, &c1);
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c2));
 }
 
 TEST(Life, Cell_CopyConstructor3) {
 	Cell c1('.');
 	ASSERT_EQ(c1.get_state(), '.');
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c1));
 	Cell c2(c1);
 	ASSERT_EQ(c2.get_state(), c1.get_state());
-	ASSERT_NE(c2.get_pointer(), c1.get_pointer());
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c2.get_pointer()));
+	ASSERT_NE(&c2, &c1);
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c2));
 }
 
 TEST(Life, Cell_CopyConstructor4) {
 	Cell c1('-');
 	ASSERT_EQ(c1.get_state(), '-');
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c1));
 	Cell c2(c1);
 	ASSERT_EQ(c2.get_state(), c1.get_state());
-	ASSERT_NE(c2.get_pointer(), c1.get_pointer());
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c2.get_pointer()));
+	ASSERT_NE(&c2, &c1);
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c2));
 }
 
 TEST(Life, Cell_Evolve1) {
 	Cell c1('*');
 	ASSERT_EQ(c1.get_state(), '*');
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c1));
 	AbstractCell* N[8] = {	new ConwayCell('*'),new ConwayCell('*'),new ConwayCell('*'),
 							new ConwayCell('*'),					new ConwayCell('.'),
 							new ConwayCell('.'),new ConwayCell('.'),new ConwayCell('.')};
@@ -324,7 +314,7 @@ TEST(Life, Cell_Evolve1) {
 TEST(Life, Cell_Evolve2) {
 	Cell c1('0');
 	ASSERT_EQ(c1.get_state(), '0');
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c1));
 	AbstractCell* N[8] = {	new ConwayCell('*'),new ConwayCell('*'),new ConwayCell('*'),
 							new ConwayCell('*'),					new ConwayCell('.'),
 							new ConwayCell('.'),new ConwayCell('.'),new ConwayCell('.')};
@@ -336,12 +326,12 @@ TEST(Life, Cell_Evolve2) {
 TEST(Life, Cell_Evolve3) {
 	Cell c1('1');
 	ASSERT_EQ(c1.get_state(), '1');
-	ASSERT_TRUE(dynamic_cast<FredkinCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<FredkinCell*>(&c1));
 	AbstractCell* N[8] = {	new ConwayCell('*'),new ConwayCell('*'),new ConwayCell('*'),
 							new ConwayCell('-'),					new ConwayCell('.'),
 							new ConwayCell('.'),new ConwayCell('.'),new ConwayCell('.')};
 	ASSERT_FALSE(c1.evolve(N));
-	ASSERT_TRUE(dynamic_cast<ConwayCell*>(c1.get_pointer()));
+	ASSERT_TRUE(dynamic_cast<ConwayCell*>(&c1));
 	ASSERT_EQ(c1.get_state(), '*');
 	for(AbstractCell* pointer : N)
 		delete pointer;
@@ -414,20 +404,20 @@ TEST(Life, Cell_IsAlive4) {
 
 TEST(Life, Cell_GetPointer1) {
 	Cell c('*');
-	ASSERT_EQ(c.get_pointer()->get_state(), '*');
+	ASSERT_EQ((&c)->get_state(), '*');
 }
 
 TEST(Life, Cell_GetPointer2) {
 	Cell c('0');
-	ASSERT_EQ(c.get_pointer()->get_state(), '0');
+	ASSERT_EQ((&c)->get_state(), '0');
 }
 
 TEST(Life, Cell_GetPointer3) {
 	Cell c1('*');
-	ASSERT_EQ(c1.get_pointer()->get_state(), '*');
+	ASSERT_EQ((&c1)->get_state(), '*');
 	Cell c2(c1);
-	ASSERT_EQ(c2.get_pointer()->get_state(), '*');
-	ASSERT_NE(c2.get_pointer(), c1.get_pointer());
+	ASSERT_EQ((&c2)->get_state(), '*');
+	ASSERT_NE(&c2, &c1);
 }
 
 // ----

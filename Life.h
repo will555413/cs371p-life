@@ -23,8 +23,6 @@ public:
 	virtual char get_state() = 0;
 
 	bool isAlive();
-
-	AbstractCell* get_pointer();
 };
 
 class ConwayCell: public AbstractCell{
@@ -68,13 +66,11 @@ public:
 	Cell(const Cell& rhs);
 	~Cell();
 	
-	// Cell(AbstractCell* address);
 	bool evolve(AbstractCell** const neighbors);
-	// Cell& operator = (const Cell& rhs);
+	AbstractCell* operator & ();
 	void shift_state();
 	char get_state();
 	bool isAlive();
-	AbstractCell* get_pointer();
 };
 
 template<typename T>
@@ -125,28 +121,28 @@ private:
 					AbstractCell* neighbors[8] = {NULL};
 					if(j-1>=0){
 						if(i-1>=0){
-							neighbors[0] = grid[i-1][j-1].get_pointer();
+							neighbors[0] = &grid[i-1][j-1];
 						}
-						neighbors[3] = grid[i][j-1].get_pointer();
+						neighbors[3] = &grid[i][j-1];
 						if(i+1<r){
-							neighbors[5] = grid[i+1][j-1].get_pointer();
+							neighbors[5] = &grid[i+1][j-1];
 						}
 					}
 					if(i-1>=0)
-						neighbors[1] = grid[i-1][j].get_pointer();
+						neighbors[1] = &grid[i-1][j];
 					if(i+1<r)
-						neighbors[6] = grid[i+1][j].get_pointer();
+						neighbors[6] = &grid[i+1][j];
 					if(j+1<c){
 						if(i-1>=0)
-							neighbors[2] = grid[i-1][j+1].get_pointer();
-						neighbors[4] = grid[i][j+1].get_pointer();
+							neighbors[2] = &grid[i-1][j+1];
+						neighbors[4] = &grid[i][j+1];
 						if(i+1<r)
-							neighbors[7] = grid[i+1][j+1].get_pointer();
+							neighbors[7] = &grid[i+1][j+1];
 					}
 
 					// if evolve() return true, which means the cell shifts its state, push it onto the buffer
 					if(grid[i][j].evolve(neighbors))
-						buffer.push_back(grid[i][j].get_pointer());
+						buffer.push_back(&grid[i][j]);
 				}
 			}
 			// for each cell pointed by the buffer, shift its state.
