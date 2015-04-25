@@ -13,15 +13,19 @@ AbstractCell::AbstractCell(char S)
 		state = true;
 }
 
+bool AbstractCell::isAlive(){ return state;}
+
+AbstractCell* AbstractCell::get_pointer(){return this;}
+
 // -----------
 // Conway Cell
 // -----------
-Conway::Conway(char S): AbstractCell(S) {}
+ConwayCell::ConwayCell(char S): AbstractCell(S) {}
 
-bool Conway::evolve(AbstractCell** const neighbors){
+bool ConwayCell::evolve(AbstractCell** const neighbors){
 	int count = 0;
 	for(int i = 0; i<=7; ++i){
-		if(neighbors[i] != NULL && dynamic_cast<Conway*>(neighbors[i])->state)
+		if(neighbors[i] != NULL && neighbors[i]->isAlive())
 			++count;
 	}
 	assert(count >= 0 && count <= 7);
@@ -32,10 +36,10 @@ bool Conway::evolve(AbstractCell** const neighbors){
 		return true;
 	return false;
 }
-void Conway::shift_state(){
+void ConwayCell::shift_state(){
 	state = !state;
 }
-char Conway::get_state(){
+char ConwayCell::get_state(){
 	if(state)
 		return '*';
 	else
@@ -45,23 +49,23 @@ char Conway::get_state(){
 // ------------
 // Fredkin Cell
 // ------------
-Fredkin::Fredkin(char S): AbstractCell(S){
+FredkinCell::FredkinCell(char S): AbstractCell(S){
 	if(S=='+')
 		age = 10;
 	else if(S <= '9' && S >= '0')
 		age = S - '0';
-	assert(age >= 0 && age <= 10);
+	assert(age >= 0);
 }
 
-bool Fredkin::evolve(AbstractCell** const neighbors){
+bool FredkinCell::evolve(AbstractCell** const neighbors){
 	int count = 0;
-	if(neighbors[1] != NULL && dynamic_cast<Fredkin*>(neighbors[1])->state)
+	if(neighbors[1] != NULL && dynamic_cast<FredkinCell*>(neighbors[1])->state)
 		++count;
-	if(neighbors[3] != NULL && dynamic_cast<Fredkin*>(neighbors[3])->state)
+	if(neighbors[3] != NULL && dynamic_cast<FredkinCell*>(neighbors[3])->state)
 		++count;
-	if(neighbors[4] != NULL && dynamic_cast<Fredkin*>(neighbors[4])->state)
+	if(neighbors[4] != NULL && dynamic_cast<FredkinCell*>(neighbors[4])->state)
 		++count;
-	if(neighbors[6] != NULL && dynamic_cast<Fredkin*>(neighbors[6])->state)
+	if(neighbors[6] != NULL && dynamic_cast<FredkinCell*>(neighbors[6])->state)
 		++count;
 	assert(count >= 0 && count <= 4);
 
@@ -79,10 +83,10 @@ bool Fredkin::evolve(AbstractCell** const neighbors){
 	}
 	return false;
 }
-void Fredkin::shift_state(){
+void FredkinCell::shift_state(){
 	state = !state;
 }
-char Fredkin::get_state(){
+char FredkinCell::get_state(){
 	if(state)
 		if(age >= 10)
 			return '+';
@@ -90,4 +94,56 @@ char Fredkin::get_state(){
 			return (char)(age+'0');
 	else
 		return '-';
+}
+
+// ----
+// Cell
+// ----
+
+Cell::Cell(char S){
+	if(S == '*'||S == '.')
+		_p = new ConwayCell(S);
+	else
+		_p = new FredkinCell(S);
+}
+
+Cell::~Cell(){
+	delete _p;
+}
+
+bool Cell::evolve(AbstractCell** const neighbors){
+	char oldstate = _p->get_state();
+	// AbstractCell* neighbors[8];
+	// for(int i=0; i<8; ++i)
+	// 	neighbors[i] = n[i]->_p;
+	bool output = _p->evolve(neighbors);
+	if(FredkinCell* cell = dynamic_cast<FredkinCell*>(_p)){
+		if(oldstate == '1' && cell->get_state()=='2'){
+			_p = new ConwayCell('*');
+			delete cell;
+		}
+	}
+	return output;
+}
+
+Cell& Cell::operator=(const Cell& rhs){
+	delete _p;
+	_p = rhs._p;
+	return *this;
+}
+
+void Cell::shift_state(){
+	_p->shift_state();
+}
+
+char Cell::get_state(){
+	return _p->get_state();
+}
+
+bool Cell::isAlive(){
+	return _p->isAlive();
+}
+
+AbstractCell* Cell::get_pointer(){
+	return _p;
 }

@@ -1,0 +1,12 @@
+Life.c++: In destructor ‘Cell::~Cell()’:
+Life.c++:111:9: warning: deleting object of abstract class type ‘AbstractCell’ which has non-virtual destructor will cause undefined behaviour [-Wdelete-non-virtual-dtor]
+  delete _p;
+         ^
+Life.c++: In member function ‘bool Cell::evolve(AbstractCell**)’:
+Life.c++:123:11: warning: deleting object of polymorphic class type ‘FredkinCell’ which has non-virtual destructor might cause undefined behaviour [-Wdelete-non-virtual-dtor]
+    delete cell;
+           ^
+Life.c++: In member function ‘Cell& Cell::operator=(const Cell&)’:
+Life.c++:130:9: warning: deleting object of abstract class type ‘AbstractCell’ which has non-virtual destructor will cause undefined behaviour [-Wdelete-non-virtual-dtor]
+  delete _p;
+         ^
