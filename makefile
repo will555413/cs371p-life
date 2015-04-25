@@ -9,14 +9,15 @@ Doxyfile:
 RunLife: Life.h Life.c++ RunLife.c++
 	g++ -pedantic -std=c++11 -Wall Life.c++ RunLife.c++ -o RunLife
 
-RunLife.out: RunLife
-	./RunLife < RunLife.in > RunLife.out
+RunLife.tmp: RunLife
+	RunLife < RunLife.in > RunLife.tmp
+	diff RunLife.tmp RunLife.out
 
 TestLife: Life.h Life.c++ TestLife.c++
 	g++ -fprofile-arcs -ftest-coverage -pedantic -std=c++11 -Wall Life.c++ TestLife.c++ -o TestLife -lgtest -lgtest_main -lpthread
 
 TestLife.out: TestLife
-	valgrind ./TestLife     >  TestLife.out 2>&1
+	valgrind TestLife     >  TestLife.out 2>&1
 	gcov -b  Life.c++     >> TestLife.out
 	gcov -b  TestLife.c++ >> TestLife.out
 
