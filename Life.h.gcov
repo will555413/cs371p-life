@@ -1,0 +1,703 @@
+        -:    0:Source:Life.h
+        -:    0:Graph:TestLife.gcno
+        -:    0:Data:TestLife.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <cassert>	// assert
+        -:    2:#include <string>	// string
+        -:    3:#include <vector>	// vector
+        -:    4:#include <iostream> // endl, istream, ostream
+        -:    5:#include <sstream>  // istringstream
+        -:    6:#include <cstdlib>	// rand
+        -:    7:
+        -:    8:using namespace std;
+        -:    9:
+function _ZN12AbstractCellC2EOS_ called 94 returned 100% blocks executed 100%
+function _ZN12AbstractCellC2ERKS_ called 0 returned 0% blocks executed 0%
+       94:   10:class AbstractCell{
+        -:   11:protected:
+        -:   12:	bool state;
+        -:   13:public:
+        -:   14:	// initialize state as true/alive or false/dead depending on the input S
+        -:   15:	// In fact, as long as the input is not '-' or '.', it will be consider as alive
+        -:   16:	AbstractCell(char S);
+        -:   17:	// in conway/fredkin cell, attempt will look at the neighbors and return true if state change, false otherwise.
+        -:   18:	// since this is not a concrete class, always return false
+        -:   19:	virtual bool evolve(AbstractCell** const neighbors) = 0;
+        -:   20:	// shift the state of this cell
+        -:   21:	void shift_state();
+        -:   22:	// this shouldn't ever be called. therefore return N as a error flag
+        -:   23:	virtual char get_state() = 0;
+        -:   24:
+        -:   25:	bool isAlive();
+        -:   26:
+        -:   27:	AbstractCell* get_pointer();
+        -:   28:};
+        -:   29:
+function _ZN10ConwayCellC2EOS_ called 47 returned 100% blocks executed 100%
+function _ZN10ConwayCellC2ERKS_ called 0 returned 0% blocks executed 0%
+       47:   30:class ConwayCell: public AbstractCell{
+call    0 returned 100%
+call    1 never executed
+        -:   31:public:
+        -:   32:	// Although Conway has no extra members to initialized compared to its parent class AbstractCell,
+        -:   33:	// it's easier to differentiate two type of initialization (Conway/Fredkin) by having a dummy constructor that simply calls the parent constructor.
+        -:   34:	ConwayCell(char S);
+        -:   35:	// return true if state has changed, false otherwise 
+        -:   36:	bool evolve(AbstractCell** const neighbors);
+        -:   37:	// print corresponding symbol of the current state: * if alive, . if dead
+        -:   38:	char get_state();
+        -:   39:};
+        -:   40:
+function _ZN11FredkinCellC2EOS_ called 47 returned 100% blocks executed 100%
+function _ZN11FredkinCellC2ERKS_ called 0 returned 0% blocks executed 0%
+       47:   41:class FredkinCell: public AbstractCell{
+call    0 returned 100%
+call    1 never executed
+        -:   42:private:
+        -:   43:	// record the age of this Fredkin cell
+        -:   44:	int age = 0;
+        -:   45:public:
+        -:   46:	// initialize the state AND the age as 0
+        -:   47:	FredkinCell(char S);
+        -:   48:	// fredkin cell evolution not only need to check its state shifting, it also need to reset/increment the age accordingly
+        -:   49:	// return true if state has changed, false otherwise 
+        -:   50:	bool evolve(AbstractCell** const neighbors);
+        -:   51:	// print corresponding symbol of the current state: a number if alive, - if dead
+        -:   52:	char get_state();
+        -:   53:};
+        -:   54:
+        -:   55:// Class cell would be structurally identical to AbstractCell with following differences
+        -:   56:// has a non-virtual evolve method.
+        -:   57:// Knowing that my world will be either consist of AbstractCell pointers or Cell pointers,
+        -:   58:// letting cell have a concrete evolve will ensure that every call through Cell* will call Cell::evolve.
+        -:   59:// That allow me to put extra code on the Cell class.
+        -:   60:// And then I'll dynamic_cast(this) into a Fradkin/Conway pointer depending on the situation
+        -:   61:
+        -:   62:// update: class Cell is a handle class
+        -:   63:class Cell{
+        -:   64:private:
+        -:   65:	AbstractCell* _p;
+        -:   66:public:
+        -:   67:	Cell(char S);
+        -:   68:	Cell(const Cell& rhs);
+        -:   69:	~Cell();
+        -:   70:	
+        -:   71:	// Cell(AbstractCell* address);
+        -:   72:	bool evolve(AbstractCell** const neighbors);
+        -:   73:	// Cell& operator = (const Cell& rhs);
+        -:   74:	void shift_state();
+        -:   75:	char get_state();
+        -:   76:	bool isAlive();
+        -:   77:	AbstractCell* get_pointer();
+        -:   78:};
+        -:   79:
+        -:   80:template<typename T>
+function _ZN4LifeI4CellED2Ev called 2 returned 100% blocks executed 100%
+function _ZN4LifeI11FredkinCellED2Ev called 2 returned 100% blocks executed 100%
+function _ZN4LifeI10ConwayCellED2Ev called 2 returned 100% blocks executed 100%
+        6:   81:class Life{
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        -:   82:private:
+        -:   83:	int population = 0, _g=0;
+        -:   84:	vector<vector<T>> grid;
+        -:   85:public:
+function _ZN4LifeI4CellEC2ERSi called 2 returned 100% blocks executed 74%
+function _ZN4LifeI11FredkinCellEC2ERSi called 2 returned 100% blocks executed 77%
+function _ZN4LifeI10ConwayCellEC2ERSi called 2 returned 100% blocks executed 77%
+        6:   86:	Life(istream& input){
+call    0 returned 100%
+call    1 never executed
+call    2 returned 100%
+call    3 never executed
+call    4 returned 100%
+call    5 never executed
+        -:   87:		int r, c;
+        6:   88:		string type;// decides what type of cell we'll be incorporating
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+        6:   89:		input>>type;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+        6:   90:		input>>r>>c;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+call    9 returned 100%
+branch 10 taken 100% (fallthrough)
+branch 11 taken 0% (throw)
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+call   15 returned 100%
+branch 16 taken 100% (fallthrough)
+branch 17 taken 0% (throw)
+       33:   91:		for(int i = 0; i<r; ++i){
+branch  0 taken 82%
+branch  1 taken 18% (fallthrough)
+branch  2 taken 82%
+branch  3 taken 18% (fallthrough)
+branch  4 taken 82%
+branch  5 taken 18% (fallthrough)
+       27:   92:			grid.push_back(vector<T>());
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+call    7 never executed
+call    8 returned 100%
+branch  9 taken 100% (fallthrough)
+branch 10 taken 0% (throw)
+call   11 returned 100%
+branch 12 taken 100% (fallthrough)
+branch 13 taken 0% (throw)
+call   14 returned 100%
+call   15 never executed
+call   16 returned 100%
+branch 17 taken 100% (fallthrough)
+branch 18 taken 0% (throw)
+call   19 returned 100%
+branch 20 taken 100% (fallthrough)
+branch 21 taken 0% (throw)
+call   22 returned 100%
+call   23 never executed
+      150:   93:			for(int j = 0; j<c; ++j){
+call    0 returned 100%
+branch  1 taken 82%
+branch  2 taken 18% (fallthrough)
+call    3 never executed
+branch  4 taken 82%
+branch  5 taken 18% (fallthrough)
+branch  6 taken 82%
+branch  7 taken 18% (fallthrough)
+        -:   94:				char temp;
+      123:   95:				input>>temp;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+        -:   96:
+      123:   97:				T cell(temp);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+      123:   98:				grid[i].push_back(cell);
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0% (throw)
+call    4 returned 100%
+call    5 returned 100%
+branch  6 taken 100% (fallthrough)
+branch  7 taken 0% (throw)
+call    8 returned 100%
+call    9 returned 100%
+branch 10 taken 100% (fallthrough)
+branch 11 taken 0% (throw)
+      123:   99:				if(cell.isAlive())
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+branch  3 taken 24% (fallthrough)
+branch  4 taken 76%
+call    5 returned 100%
+branch  6 taken 100% (fallthrough)
+branch  7 taken 0% (throw)
+branch  8 taken 24% (fallthrough)
+branch  9 taken 76%
+call   10 returned 100%
+branch 11 taken 100% (fallthrough)
+branch 12 taken 0% (throw)
+branch 13 taken 17% (fallthrough)
+branch 14 taken 83%
+       27:  100:					++population;
+        -:  101:			}
+        6:  102:		}
+call    0 returned 100%
+call    1 never executed
+call    2 returned 100%
+call    3 never executed
+call    4 returned 100%
+call    5 never executed
+        6:  103:	}
+        -:  104:
+        -:  105:private:
+        -:  106:	// evolve until the current generation count, _g, reached the specified generation, specific_g
+        -:  107:	// in this method, I will supply all neighboring cells to the evolving cell, and, 
+        -:  108:	// depending on the type of the evolving cell, some neighbors' state will be ignore (i.e. Fredkin cell ignores the diagnols)
+        -:  109:	// the 8 neighboring cells will be pointed by an array of AbstractCell*, and their corresponding index looks like:
+        -:  110:	// 0 1 2
+        -:  111:	// 3 e 4
+        -:  112:	// 5 6 7
+        -:  113:	// e being the evolving cell.
+function _ZN4LifeI4CellE13run_evolutionEi called 3 returned 100% blocks executed 94%
+function _ZN4LifeI11FredkinCellE13run_evolutionEi called 2 returned 100% blocks executed 94%
+function _ZN4LifeI10ConwayCellE13run_evolutionEi called 2 returned 100% blocks executed 94%
+        7:  114:	void run_evolution(int specific_g){
+        -:  115:		// variable that saves the size of the grid
+        7:  116:		int r = grid.size(), c = grid[0].size();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+call    8 returned 100%
+       11:  117:		for(; _g<specific_g; ++_g){
+call    0 returned 100%
+branch  1 taken 40%
+branch  2 taken 60% (fallthrough)
+call    3 never executed
+call    4 returned 100%
+branch  5 taken 33%
+branch  6 taken 67% (fallthrough)
+call    7 never executed
+call    8 returned 100%
+branch  9 taken 33%
+branch 10 taken 67% (fallthrough)
+call   11 never executed
+        -:  118:			// buffer that records all Cells that needs to shift its state after each iteration
+        -:  119:			// this allow me to iterate through the grid only once and gather all the changes need to be done without changing the state of each cell
+        4:  120:			vector<AbstractCell*> buffer;
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+        -:  121:			// iterate through the grid
+       24:  122:			for(int i = 0; i < r; ++i){
+branch  0 taken 83%
+branch  1 taken 17% (fallthrough)
+branch  2 taken 83%
+branch  3 taken 17% (fallthrough)
+branch  4 taken 83%
+branch  5 taken 17% (fallthrough)
+      120:  123:				for(int j = 0; j < c; ++j){
+branch  0 taken 83%
+branch  1 taken 17% (fallthrough)
+branch  2 taken 83%
+branch  3 taken 17% (fallthrough)
+branch  4 taken 83%
+branch  5 taken 17% (fallthrough)
+        -:  124:					// construct a array of 8 pointers that'll later be used by the AbstractCell/Cell class to determine the state of the neighbors
+      100:  125:					AbstractCell* neighbors[8] = {NULL};
+      100:  126:					if(j-1>=0){
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       80:  127:						if(i-1>=0){
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       64:  128:							neighbors[0] = grid[i-1][j-1].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+        -:  129:						}
+       80:  130:						neighbors[3] = grid[i][j-1].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+       80:  131:						if(i+1<r){
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       64:  132:							neighbors[5] = grid[i+1][j-1].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+        -:  133:						}
+        -:  134:					}
+      100:  135:					if(i-1>=0)
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       80:  136:						neighbors[1] = grid[i-1][j].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+      100:  137:					if(i+1<r)
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       80:  138:						neighbors[6] = grid[i+1][j].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+      100:  139:					if(j+1<c){
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       80:  140:						if(i-1>=0)
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       64:  141:							neighbors[2] = grid[i-1][j+1].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+       80:  142:						neighbors[4] = grid[i][j+1].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+       80:  143:						if(i+1<r)
+branch  0 taken 80% (fallthrough)
+branch  1 taken 20%
+branch  2 taken 80% (fallthrough)
+branch  3 taken 20%
+branch  4 taken 80% (fallthrough)
+branch  5 taken 20%
+       64:  144:							neighbors[7] = grid[i+1][j+1].get_pointer();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+branch  8 taken 100% (fallthrough)
+branch  9 taken 0% (throw)
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+branch 13 taken 100% (fallthrough)
+branch 14 taken 0% (throw)
+        -:  145:					}
+        -:  146:
+        -:  147:					// if evolve() return true, which means the cell shifts its state, push it onto the buffer
+      100:  148:					if(grid[i][j].evolve(neighbors))
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+branch  5 taken 36% (fallthrough)
+branch  6 taken 64%
+call    7 returned 100%
+call    8 returned 100%
+call    9 returned 100%
+branch 10 taken 100% (fallthrough)
+branch 11 taken 0% (throw)
+branch 12 taken 40% (fallthrough)
+branch 13 taken 60%
+call   14 returned 100%
+call   15 returned 100%
+call   16 returned 100%
+branch 17 taken 100% (fallthrough)
+branch 18 taken 0% (throw)
+branch 19 taken 16% (fallthrough)
+branch 20 taken 84%
+       32:  149:						buffer.push_back(grid[i][j].get_pointer());
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+call    5 returned 100%
+branch  6 taken 100% (fallthrough)
+branch  7 taken 0% (throw)
+call    8 returned 100%
+call    9 returned 100%
+call   10 returned 100%
+branch 11 taken 100% (fallthrough)
+branch 12 taken 0% (throw)
+call   13 returned 100%
+branch 14 taken 100% (fallthrough)
+branch 15 taken 0% (throw)
+call   16 returned 100%
+call   17 returned 100%
+call   18 returned 100%
+branch 19 taken 100% (fallthrough)
+branch 20 taken 0% (throw)
+call   21 returned 100%
+branch 22 taken 100% (fallthrough)
+branch 23 taken 0% (throw)
+        -:  150:				}
+        -:  151:			}
+        -:  152:			// for each cell pointed by the buffer, shift its state.
+       36:  153:			for(AbstractCell* to_change : buffer){
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+branch  5 taken 100% (fallthrough)
+branch  6 taken 0% (throw)
+branch  7 taken 90%
+branch  8 taken 10% (fallthrough)
+call    9 returned 100%
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+call   13 returned 100%
+branch 14 taken 100% (fallthrough)
+branch 15 taken 0% (throw)
+branch 16 taken 91%
+branch 17 taken 9% (fallthrough)
+call   18 returned 100%
+call   19 returned 100%
+call   20 returned 100%
+call   21 returned 100%
+call   22 returned 100%
+branch 23 taken 100% (fallthrough)
+branch 24 taken 0% (throw)
+branch 25 taken 80%
+branch 26 taken 20% (fallthrough)
+       32:  154:				to_change->shift_state();
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+branch  7 taken 100% (fallthrough)
+branch  8 taken 0% (throw)
+       32:  155:				if(to_change->isAlive())
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+branch  3 taken 67% (fallthrough)
+branch  4 taken 33%
+call    5 returned 100%
+branch  6 taken 100% (fallthrough)
+branch  7 taken 0% (throw)
+branch  8 taken 80% (fallthrough)
+branch  9 taken 20%
+call   10 returned 100%
+branch 11 taken 100% (fallthrough)
+branch 12 taken 0% (throw)
+branch 13 taken 50% (fallthrough)
+branch 14 taken 50%
+       22:  156:					++population;
+        -:  157:				else
+       10:  158:					--population;
+        -:  159:			}
+        -:  160:		}
+        7:  161:	}
+        -:  162:
+        -:  163:public:
+        -:  164:	// print grid of the generation gen
+function _ZN4LifeI4CellE10print_gridEiRSo called 3 returned 100% blocks executed 100%
+function _ZN4LifeI11FredkinCellE10print_gridEiRSo called 2 returned 100% blocks executed 100%
+function _ZN4LifeI10ConwayCellE10print_gridEiRSo called 2 returned 100% blocks executed 100%
+        7:  165:	void print_grid(int gen, ostream& out){
+        7:  166:		run_evolution(gen);
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        7:  167:		out<<"Generation = "<<gen<<", Population = "<<population<<"."<<endl;
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+call    8 returned 100%
+call    9 returned 100%
+call   10 returned 100%
+call   11 returned 100%
+call   12 returned 100%
+call   13 returned 100%
+call   14 returned 100%
+call   15 returned 100%
+call   16 returned 100%
+call   17 returned 100%
+       39:  168:		for(unsigned int i = 0; i<grid.size(); ++i){
+call    0 returned 100%
+branch  1 taken 82%
+branch  2 taken 18% (fallthrough)
+call    3 returned 100%
+branch  4 taken 82%
+branch  5 taken 18% (fallthrough)
+call    6 returned 100%
+branch  7 taken 82%
+branch  8 taken 18% (fallthrough)
+      180:  169:			for(unsigned int j = 0; j<grid[i].size(); ++j){
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 83%
+branch  3 taken 18% (fallthrough)
+call    4 returned 100%
+call    5 returned 100%
+branch  6 taken 82%
+branch  7 taken 18% (fallthrough)
+call    8 returned 100%
+call    9 returned 100%
+branch 10 taken 82%
+branch 11 taken 18% (fallthrough)
+      148:  170:				out<<grid[i][j].get_state();
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+call    5 returned 100%
+call    6 returned 100%
+call    7 returned 100%
+call    8 returned 100%
+call    9 returned 100%
+call   10 returned 100%
+call   11 returned 100%
+        -:  171:			}
+       32:  172:			out<<endl;
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        -:  173:		}
+        7:  174:		out<<endl;
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        7:  175:	}
+        -:  176:};

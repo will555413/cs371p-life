@@ -12,6 +12,7 @@ protected:
 	bool state;
 public:
 	// initialize state as true/alive or false/dead depending on the input S
+	// In fact, as long as the input is not '-' or '.', it will be consider as alive
 	AbstractCell(char S);
 	// in conway/fredkin cell, attempt will look at the neighbors and return true if state change, false otherwise.
 	// since this is not a concrete class, always return false
@@ -87,7 +88,6 @@ public:
 		string type;// decides what type of cell we'll be incorporating
 		input>>type;
 		input>>r>>c;
-		// cout<<"type: "<<type<<"\nr = "<<r<<", c = "<<c<<endl;
 		for(int i = 0; i<r; ++i){
 			grid.push_back(vector<T>());
 			for(int j = 0; j<c; ++j){
@@ -102,12 +102,7 @@ public:
 		}
 	}
 
-	// ~Life(){
-	// 	for(vector<T*> row:grid)
-	// 		for(T* element:row)
-	// 			delete element;
-	// }
-
+private:
 	// evolve until the current generation count, _g, reached the specified generation, specific_g
 	// in this method, I will supply all neighboring cells to the evolving cell, and, 
 	// depending on the type of the evolving cell, some neighbors' state will be ignore (i.e. Fredkin cell ignores the diagnols)
@@ -165,16 +160,17 @@ public:
 		}
 	}
 
+public:
 	// print grid of the generation gen
-	void print_grid(int gen){
+	void print_grid(int gen, ostream& out){
 		run_evolution(gen);
-		cout<<"Generation = "<<gen<<", Population = "<<population<<"."<<endl;
+		out<<"Generation = "<<gen<<", Population = "<<population<<"."<<endl;
 		for(unsigned int i = 0; i<grid.size(); ++i){
 			for(unsigned int j = 0; j<grid[i].size(); ++j){
-				cout<<grid[i][j].get_state();
+				out<<grid[i][j].get_state();
 			}
-			cout<<endl;
+			out<<endl;
 		}
-		cout<<endl;
+		out<<endl;
 	}
 };
