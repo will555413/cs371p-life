@@ -68,11 +68,12 @@ private:
 	AbstractCell* _p;
 public:
 	Cell(char S);
+	Cell(const Cell& rhs);
 	~Cell();
 	
 	// Cell(AbstractCell* address);
 	bool evolve(AbstractCell** const neighbors);
-	Cell& operator = (const Cell& rhs);
+	// Cell& operator = (const Cell& rhs);
 	void shift_state();
 	char get_state();
 	bool isAlive();
@@ -90,8 +91,7 @@ public:
 		string type;// decides what type of cell we'll be incorporating
 		input>>type;
 		input>>r>>c;
-		// bool conway = (type == "ConwayCell");
-		// cout<<"Type: "<<type<<endl<<r<<" rows"<<endl<<c<<" columns"<<endl;
+		// cout<<"type: "<<type<<"\nr = "<<r<<", c = "<<c<<endl;
 		for(int i = 0; i<r; ++i){
 			grid.push_back(vector<T>());
 			for(int j = 0; j<c; ++j){
@@ -104,6 +104,7 @@ public:
 					++population;
 			}
 		}
+		// cout<<"nested for loop ended"<<endl;
 		print_grid(0);
 	}
 
@@ -113,10 +114,18 @@ public:
 	// 			delete element;
 	// }
 
-	void run_evolution(int generations){
+	// evolve until the current generation count, _g, reached the specified generation, specific_g
+	// in this method, I will supply all neighboring cells to the evolving cell, and, 
+	// depending on the type of the evolving cell, some neighbors' state will be ignore (i.e. Fredkin cell ignores the diagnols)
+	// the 8 neighboring cells will be pointed by an array of AbstractCell*, and their corresponding index looks like:
+	// 0 1 2
+	// 3 e 4
+	// 5 6 7
+	// e being the evolving cell.
+	void run_evolution(int specific_g){
 		// variable that saves the size of the grid
 		int r = grid.size(), c = grid[0].size();
-		for(; _g<generations; ++_g){
+		for(; _g<specific_g; ++_g){
 			// buffer that records all Cells that needs to shift its state after each iteration
 			// this allow me to iterate through the grid only once and gather all the changes need to be done without changing the state of each cell
 			vector<AbstractCell*> buffer;
@@ -160,6 +169,7 @@ public:
 		}
 	}
 
+	// print grid of the generation gen
 	void print_grid(int gen){
 		cout<<"Generation = "<<gen<<", Population = "<<population<<"."<<endl;
 		run_evolution(gen);

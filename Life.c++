@@ -59,13 +59,13 @@ FredkinCell::FredkinCell(char S): AbstractCell(S){
 
 bool FredkinCell::evolve(AbstractCell** const neighbors){
 	int count = 0;
-	if(neighbors[1] != NULL && dynamic_cast<FredkinCell*>(neighbors[1])->state)
+	if(neighbors[1] != NULL && neighbors[1]->isAlive())
 		++count;
-	if(neighbors[3] != NULL && dynamic_cast<FredkinCell*>(neighbors[3])->state)
+	if(neighbors[3] != NULL && neighbors[3]->isAlive())
 		++count;
-	if(neighbors[4] != NULL && dynamic_cast<FredkinCell*>(neighbors[4])->state)
+	if(neighbors[4] != NULL && neighbors[4]->isAlive())
 		++count;
-	if(neighbors[6] != NULL && dynamic_cast<FredkinCell*>(neighbors[6])->state)
+	if(neighbors[6] != NULL && neighbors[6]->isAlive())
 		++count;
 	assert(count >= 0 && count <= 4);
 
@@ -107,6 +107,13 @@ Cell::Cell(char S){
 		_p = new FredkinCell(S);
 }
 
+Cell::Cell(const Cell& rhs){
+	if(dynamic_cast<ConwayCell*>(rhs._p))
+		_p = new ConwayCell(*(dynamic_cast<ConwayCell*>(rhs._p)));
+	else
+		_p = new FredkinCell(*(dynamic_cast<FredkinCell*>(rhs._p)));
+}
+
 Cell::~Cell(){
 	delete _p;
 }
@@ -126,11 +133,11 @@ bool Cell::evolve(AbstractCell** const neighbors){
 	return output;
 }
 
-Cell& Cell::operator=(const Cell& rhs){
-	delete _p;
-	_p = rhs._p;
-	return *this;
-}
+// Cell& Cell::operator=(const Cell& rhs){
+// 	delete _p;
+// 	_p = rhs._p;
+// 	return *this;
+// }
 
 void Cell::shift_state(){
 	_p->shift_state();
