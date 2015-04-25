@@ -13,6 +13,8 @@ AbstractCell::AbstractCell(char S)
 		state = true;
 }
 
+void AbstractCell::shift_state(){state = !state;}
+
 bool AbstractCell::isAlive(){ return state;}
 
 AbstractCell* AbstractCell::get_pointer(){return this;}
@@ -28,16 +30,13 @@ bool ConwayCell::evolve(AbstractCell** const neighbors){
 		if(neighbors[i] != NULL && neighbors[i]->isAlive())
 			++count;
 	}
-	assert(count >= 0 && count <= 7);
+	assert(count >= 0 && count <= 8);
 
 	if(state && (count < 2 || count > 3))
 		return true;
 	else if(!state && count == 3)
 		return true;
 	return false;
-}
-void ConwayCell::shift_state(){
-	state = !state;
 }
 char ConwayCell::get_state(){
 	if(state)
@@ -59,13 +58,13 @@ FredkinCell::FredkinCell(char S): AbstractCell(S){
 
 bool FredkinCell::evolve(AbstractCell** const neighbors){
 	int count = 0;
-	if(neighbors[1] != NULL && neighbors[1]->isAlive())
+	if(neighbors[1] && neighbors[1]->isAlive())
 		++count;
-	if(neighbors[3] != NULL && neighbors[3]->isAlive())
+	if(neighbors[3] && neighbors[3]->isAlive())
 		++count;
-	if(neighbors[4] != NULL && neighbors[4]->isAlive())
+	if(neighbors[4] && neighbors[4]->isAlive())
 		++count;
-	if(neighbors[6] != NULL && neighbors[6]->isAlive())
+	if(neighbors[6] && neighbors[6]->isAlive())
 		++count;
 	assert(count >= 0 && count <= 4);
 
@@ -83,15 +82,13 @@ bool FredkinCell::evolve(AbstractCell** const neighbors){
 	}
 	return false;
 }
-void FredkinCell::shift_state(){
-	state = !state;
-}
 char FredkinCell::get_state(){
-	if(state)
+	if(state){
 		if(age >= 10)
 			return '+';
 		else
 			return (char)(age+'0');
+	}
 	else
 		return '-';
 }

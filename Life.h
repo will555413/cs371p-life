@@ -17,7 +17,7 @@ public:
 	// since this is not a concrete class, always return false
 	virtual bool evolve(AbstractCell** const neighbors) = 0;
 	// shift the state of this cell
-	virtual void shift_state() = 0;
+	void shift_state();
 	// this shouldn't ever be called. therefore return N as a error flag
 	virtual char get_state() = 0;
 
@@ -33,8 +33,6 @@ public:
 	ConwayCell(char S);
 	// return true if state has changed, false otherwise 
 	bool evolve(AbstractCell** const neighbors);
-	// shift the state of this conway cell
-	void shift_state();
 	// print corresponding symbol of the current state: * if alive, . if dead
 	char get_state();
 };
@@ -49,8 +47,6 @@ public:
 	// fredkin cell evolution not only need to check its state shifting, it also need to reset/increment the age accordingly
 	// return true if state has changed, false otherwise 
 	bool evolve(AbstractCell** const neighbors);
-	// shift the state of this fredkin cell
-	void shift_state();
 	// print corresponding symbol of the current state: a number if alive, - if dead
 	char get_state();
 };
@@ -104,8 +100,6 @@ public:
 					++population;
 			}
 		}
-		// cout<<"nested for loop ended"<<endl;
-		print_grid(0);
 	}
 
 	// ~Life(){
@@ -137,18 +131,20 @@ public:
 					if(j-1>=0){
 						if(i-1>=0){
 							neighbors[0] = grid[i-1][j-1].get_pointer();
-							neighbors[3] = grid[i-1][j].get_pointer();
 						}
-						neighbors[1] = grid[i][j-1].get_pointer();
+						neighbors[3] = grid[i][j-1].get_pointer();
 						if(i+1<r){
-							neighbors[2] = grid[i+1][j-1].get_pointer();
-							neighbors[4] = grid[i+1][j].get_pointer();
+							neighbors[5] = grid[i+1][j-1].get_pointer();
 						}
 					}
+					if(i-1>=0)
+						neighbors[1] = grid[i-1][j].get_pointer();
+					if(i+1<r)
+						neighbors[6] = grid[i+1][j].get_pointer();
 					if(j+1<c){
 						if(i-1>=0)
-							neighbors[5] = grid[i-1][j+1].get_pointer();
-						neighbors[6] = grid[i][j+1].get_pointer();
+							neighbors[2] = grid[i-1][j+1].get_pointer();
+						neighbors[4] = grid[i][j+1].get_pointer();
 						if(i+1<r)
 							neighbors[7] = grid[i+1][j+1].get_pointer();
 					}
@@ -171,8 +167,8 @@ public:
 
 	// print grid of the generation gen
 	void print_grid(int gen){
-		cout<<"Generation = "<<gen<<", Population = "<<population<<"."<<endl;
 		run_evolution(gen);
+		cout<<"Generation = "<<gen<<", Population = "<<population<<"."<<endl;
 		for(unsigned int i = 0; i<grid.size(); ++i){
 			for(unsigned int j = 0; j<grid[i].size(); ++j){
 				cout<<grid[i][j].get_state();

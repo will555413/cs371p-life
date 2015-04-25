@@ -31,7 +31,6 @@ int main () {
     Life<ConwayCell> l1(cin);
     // for(int g = 1; g<=12; ++g)
     //     l1.print_grid(g);
-    // l1.run_evolution(12);
 
     // -----------------
     // Conway Cell 20x29
@@ -43,7 +42,6 @@ int main () {
     Print every 4th grid (i.e. 0, 4, 8, ... 28)
     */
     Life<ConwayCell> l2(cin);
-    // l2.print_grid();
 
     // ------------------
     // Conway Cell 109x69
@@ -60,7 +58,11 @@ int main () {
     Print the 2500th grid.
     */
     Life<ConwayCell> l3(cin);
-    // l3.print_grid();
+    // for(int g = 0; g<=10; ++g)
+    //     l3.print_grid(g);
+    // l3.print_grid(283);
+    // l3.print_grid(323);
+    // l3.print_grid(2500);
 
     // ------------------
     // Fredkin Cell 20x20
@@ -72,9 +74,8 @@ int main () {
     Print every grid (i.e. 0, 1, 2, ... 5)
     */
     Life<FredkinCell> l4(cin);
-    for(int g = 1; g<=12; ++g)
-        l4.print_grid(g);
-    // l4.run_evolution(5);
+    // for(int g = 1; g<=12; ++g)
+    //     l4.print_grid(g);
 
     // ----------
     // Cell 20x20
@@ -86,6 +87,7 @@ int main () {
     Print every grid (i.e. 0, 1, 2, ... 5)
     */
     Life<Cell> l5(cin);
-    // l5.run_evolution(5);
+    for(int g = 0; g<=5; ++g)
+        l5.print_grid(g);
 
     return 0;}
