@@ -115,9 +115,6 @@ Cell::~Cell(){
 
 bool Cell::evolve(AbstractCell** const neighbors){
 	char oldstate = _p->get_state();
-	// AbstractCell* neighbors[8];
-	// for(int i=0; i<8; ++i)
-	// 	neighbors[i] = n[i]->_p;
 	bool output = _p->evolve(neighbors);
 	if(FredkinCell* cell = dynamic_cast<FredkinCell*>(_p)){
 		if(oldstate == '1' && cell->get_state()=='2'){
@@ -127,12 +124,6 @@ bool Cell::evolve(AbstractCell** const neighbors){
 	}
 	return output;
 }
-
-// Cell& Cell::operator=(const Cell& rhs){
-// 	delete _p;
-// 	_p = rhs._p;
-// 	return *this;
-// }
 
 void Cell::shift_state(){
 	_p->shift_state();

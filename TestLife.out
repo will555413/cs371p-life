@@ -1,8 +1,8 @@
-==18488== Memcheck, a memory error detector
-==18488== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==18488== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
-==18488== Command: ./TestLife
-==18488== 
+==19984== Memcheck, a memory error detector
+==19984== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==19984== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==19984== Command: ./TestLife
+==19984== 
 Running main() from gtest_main.cc
 [==========] Running 60 tests from 1 test case.
 [----------] Global test environment set-up.
@@ -18,13 +18,13 @@ Running main() from gtest_main.cc
 [ RUN      ] Life.AbstractCell_IsAlive1
 [       OK ] Life.AbstractCell_IsAlive1 (2 ms)
 [ RUN      ] Life.AbstractCell_IsAlive2
-[       OK ] Life.AbstractCell_IsAlive2 (3 ms)
+[       OK ] Life.AbstractCell_IsAlive2 (2 ms)
 [ RUN      ] Life.AbstractCell_IsAlive3
 [       OK ] Life.AbstractCell_IsAlive3 (3 ms)
 [ RUN      ] Life.AbstractCell_IsAlive4
 [       OK ] Life.AbstractCell_IsAlive4 (3 ms)
 [ RUN      ] Life.ConwayCell_Constructor1
-[       OK ] Life.ConwayCell_Constructor1 (3 ms)
+[       OK ] Life.ConwayCell_Constructor1 (2 ms)
 [ RUN      ] Life.ConwayCell_Constructor2
 [       OK ] Life.ConwayCell_Constructor2 (2 ms)
 [ RUN      ] Life.ConwayCell_Constructor3
@@ -42,25 +42,25 @@ Running main() from gtest_main.cc
 [ RUN      ] Life.ConwayCell_GetState1
 [       OK ] Life.ConwayCell_GetState1 (2 ms)
 [ RUN      ] Life.ConwayCell_GetState2
-[       OK ] Life.ConwayCell_GetState2 (3 ms)
+[       OK ] Life.ConwayCell_GetState2 (2 ms)
 [ RUN      ] Life.ConwayCell_GetState3
-[       OK ] Life.ConwayCell_GetState3 (2 ms)
+[       OK ] Life.ConwayCell_GetState3 (3 ms)
 [ RUN      ] Life.FredkinCell_Constructor1
-[       OK ] Life.FredkinCell_Constructor1 (2 ms)
+[       OK ] Life.FredkinCell_Constructor1 (3 ms)
 [ RUN      ] Life.FredkinCell_Constructor2
-[       OK ] Life.FredkinCell_Constructor2 (3 ms)
+[       OK ] Life.FredkinCell_Constructor2 (2 ms)
 [ RUN      ] Life.FredkinCell_Constructor3
-[       OK ] Life.FredkinCell_Constructor3 (9 ms)
+[       OK ] Life.FredkinCell_Constructor3 (10 ms)
 [ RUN      ] Life.FredkinCell_Evolve1
-[       OK ] Life.FredkinCell_Evolve1 (4 ms)
+[       OK ] Life.FredkinCell_Evolve1 (5 ms)
 [ RUN      ] Life.FredkinCell_Evolve2
-[       OK ] Life.FredkinCell_Evolve2 (4 ms)
+[       OK ] Life.FredkinCell_Evolve2 (5 ms)
 [ RUN      ] Life.FredkinCell_Evolve3
 [       OK ] Life.FredkinCell_Evolve3 (5 ms)
 [ RUN      ] Life.FredkinCell_Evolve4
-[       OK ] Life.FredkinCell_Evolve4 (4 ms)
+[       OK ] Life.FredkinCell_Evolve4 (5 ms)
 [ RUN      ] Life.FredkinCell_GetState1
-[       OK ] Life.FredkinCell_GetState1 (2 ms)
+[       OK ] Life.FredkinCell_GetState1 (3 ms)
 [ RUN      ] Life.FredkinCell_GetState2
 [       OK ] Life.FredkinCell_GetState2 (2 ms)
 [ RUN      ] Life.FredkinCell_GetState3
@@ -70,17 +70,17 @@ Running main() from gtest_main.cc
 [ RUN      ] Life.Cell_CharConstructor2
 [       OK ] Life.Cell_CharConstructor2 (4 ms)
 [ RUN      ] Life.Cell_CharConstructor3
-[       OK ] Life.Cell_CharConstructor3 (4 ms)
+[       OK ] Life.Cell_CharConstructor3 (5 ms)
 [ RUN      ] Life.Cell_CharConstructor4
 [       OK ] Life.Cell_CharConstructor4 (4 ms)
 [ RUN      ] Life.Cell_CopyConstructor1
-[       OK ] Life.Cell_CopyConstructor1 (10 ms)
+[       OK ] Life.Cell_CopyConstructor1 (9 ms)
 [ RUN      ] Life.Cell_CopyConstructor2
 [       OK ] Life.Cell_CopyConstructor2 (10 ms)
 [ RUN      ] Life.Cell_CopyConstructor3
-[       OK ] Life.Cell_CopyConstructor3 (9 ms)
+[       OK ] Life.Cell_CopyConstructor3 (8 ms)
 [ RUN      ] Life.Cell_CopyConstructor4
-[       OK ] Life.Cell_CopyConstructor4 (7 ms)
+[       OK ] Life.Cell_CopyConstructor4 (8 ms)
 [ RUN      ] Life.Cell_Evolve1
 [       OK ] Life.Cell_Evolve1 (8 ms)
 [ RUN      ] Life.Cell_Evolve2
@@ -92,15 +92,15 @@ Running main() from gtest_main.cc
 [ RUN      ] Life.Cell_ShiftState2
 [       OK ] Life.Cell_ShiftState2 (4 ms)
 [ RUN      ] Life.Cell_ShiftState3
-[       OK ] Life.Cell_ShiftState3 (4 ms)
+[       OK ] Life.Cell_ShiftState3 (3 ms)
 [ RUN      ] Life.Cell_ShiftState4
 [       OK ] Life.Cell_ShiftState4 (4 ms)
 [ RUN      ] Life.Cell_GetState1
-[       OK ] Life.Cell_GetState1 (3 ms)
+[       OK ] Life.Cell_GetState1 (2 ms)
 [ RUN      ] Life.Cell_GetState2
 [       OK ] Life.Cell_GetState2 (3 ms)
 [ RUN      ] Life.Cell_GetState3
-[       OK ] Life.Cell_GetState3 (4 ms)
+[       OK ] Life.Cell_GetState3 (5 ms)
 [ RUN      ] Life.Cell_IsAlive1
 [       OK ] Life.Cell_IsAlive1 (3 ms)
 [ RUN      ] Life.Cell_IsAlive2
@@ -116,31 +116,31 @@ Running main() from gtest_main.cc
 [ RUN      ] Life.Cell_GetPointer3
 [       OK ] Life.Cell_GetPointer3 (5 ms)
 [ RUN      ] Life.Life_Constructor1
-[       OK ] Life.Life_Constructor1 (70 ms)
+[       OK ] Life.Life_Constructor1 (71 ms)
 [ RUN      ] Life.Life_Constructor2
-[       OK ] Life.Life_Constructor2 (50 ms)
+[       OK ] Life.Life_Constructor2 (51 ms)
 [ RUN      ] Life.Life_Constructor3
-[       OK ] Life.Life_Constructor3 (50 ms)
+[       OK ] Life.Life_Constructor3 (51 ms)
 [ RUN      ] Life.Life_RunEvo1
 [       OK ] Life.Life_RunEvo1 (36 ms)
 [ RUN      ] Life.Life_RunEvo2
-[       OK ] Life.Life_RunEvo2 (17 ms)
+[       OK ] Life.Life_RunEvo2 (18 ms)
 [ RUN      ] Life.Life_RunEvo3
 [       OK ] Life.Life_RunEvo3 (21 ms)
-[----------] 60 tests from Life (522 ms total)
+[----------] 60 tests from Life (529 ms total)
 
 [----------] Global test environment tear-down
-[==========] 60 tests from 1 test case ran. (575 ms total)
+[==========] 60 tests from 1 test case ran. (586 ms total)
 [  PASSED  ] 60 tests.
-==18488== 
-==18488== HEAP SUMMARY:
-==18488==     in use at exit: 0 bytes in 0 blocks
-==18488==   total heap usage: 2,649 allocs, 2,649 frees, 192,302 bytes allocated
-==18488== 
-==18488== All heap blocks were freed -- no leaks are possible
-==18488== 
-==18488== For counts of detected and suppressed errors, rerun with: -v
-==18488== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==19984== 
+==19984== HEAP SUMMARY:
+==19984==     in use at exit: 0 bytes in 0 blocks
+==19984==   total heap usage: 2,649 allocs, 2,649 frees, 192,302 bytes allocated
+==19984== 
+==19984== All heap blocks were freed -- no leaks are possible
+==19984== 
+==19984== For counts of detected and suppressed errors, rerun with: -v
+==19984== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 File 'Life.c++'
 Lines executed:98.86% of 88
 Branches executed:100.00% of 114
