@@ -1,0 +1,73 @@
+commit 6e04e3895fbf6593f5ce79972144fbd42affd4ae
+Author: William <will555413>
+Date:   Sat Apr 25 19:38:31 2015 -0500
+
+    html added; code polished for review
+
+commit 92a3082c538ad82aaa43f17fd176ccdf19728851
+Author: William <will555413>
+Date:   Sat Apr 25 18:26:46 2015 -0500
+
+    overloaded operator & for class Cell
+
+commit d9082d58c12bb9014021f6252f4fba886a4fc61b
+Author: William <will555413>
+Date:   Sat Apr 25 18:08:01 2015 -0500
+
+    tests written
+
+commit b6053509dbc87a23ab24e4b6d60a8a700a952639
+Author: William <will555413>
+Date:   Sat Apr 25 18:04:22 2015 -0500
+
+    Revert "tests written"
+    
+    This reverts commit daa744f5746749a3795698ecd681cc02c042de57.
+
+commit daa744f5746749a3795698ecd681cc02c042de57
+Author: William <will555413>
+Date:   Sat Apr 25 17:56:17 2015 -0500
+
+    tests written
+
+commit d2fe0d8d6df3822eaacb1313204ce2c5d8fe1f54
+Author: William <will555413>
+Date:   Sat Apr 25 15:22:56 2015 -0500
+
+    All functions operational; slight variation on the third Conway output; tests needed
+
+commit 6eb0c43aa13fbf1768df65fe993119472790cae9
+Author: William <will555413>
+Date:   Sat Apr 25 00:14:25 2015 -0500
+
+    handle class added: Conway remain functional; Fredkin shows slight asymmetical behavior after some evolution; Cell untested
+
+commit a62babf8355cbb2c02f6fbb9db3456a1620c16f6
+Author: William <will555413>
+Date:   Fri Apr 24 22:07:30 2015 -0500
+
+    cell handle class prototype 1
+
+commit 79f5a49183d1e12fbd68cc4bc68ac56f668dfc64
+Author: William <will555413>
+Date:   Tue Apr 21 00:28:21 2015 -0500
+
+    helper function in class Life added: isAlive() and isConway()
+
+commit d09e9f7408bf55621a77a7ecd67ab0ed1cc12924
+Author: William <will555413>
+Date:   Mon Apr 20 23:23:36 2015 -0500
+
+    branch test
+
+commit 275c016188fad10b83fab0fc98d30174c10ab167
+Author: William <will555413>
+Date:   Mon Apr 20 23:21:08 2015 -0500
+
+    first prototype: Conway/Fredkin standalone cell working
+
+commit fa95932c7af538125653b0497f4440fb4d56e2f5
+Author: William <will555413>
+Date:   Fri Apr 17 13:17:39 2015 -0500
+
+    initial commit
