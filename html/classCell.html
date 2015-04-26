@@ -131,6 +131,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Create a ConwayCell/FredkinCell object on heap and saves its address in _p. </p>
 
 </div>
 </div>
@@ -147,6 +148,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Extract the <a class="el" href="classAbstractCell.html">AbstractCell</a> object rhs is handling and duplicate that object on heap. Stored the address to the duplicate created in _p; </p>
 
 </div>
 </div>
@@ -162,6 +164,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Deallocate the space _p pointed to. </p>
 
 </div>
 </div>
@@ -179,6 +182,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Other than running the regular <a class="el" href="classCell.html#a8f5886fbfafc044567b320b30f5b7cfa">evolve()</a> on the handled cell, <a class="el" href="classCell.html">Cell</a>'s <a class="el" href="classCell.html#a8f5886fbfafc044567b320b30f5b7cfa">evolve()</a> also monitor the type of such cell. If the handled cell is of type <a class="el" href="classFredkinCell.html">FredkinCell</a> and just change from age 1 to 2, deallocate the original cell and redirect _p to a new alive <a class="el" href="classConwayCell.html">ConwayCell</a> on heap. </p>
 
 </div>
 </div>
@@ -194,6 +198,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Calls handled cell's get_state method. </p>
 
 </div>
 </div>
@@ -209,6 +214,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Calls handled cell's isAlive method. </p>
 
 </div>
 </div>
@@ -224,6 +230,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Rather than returning <a class="el" href="classCell.html">Cell</a>'s address, I overloaded operator&amp; to return _p; </p>
 
 </div>
 </div>
@@ -239,6 +246,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Calls handled cell's shift_state method. </p>
 
 </div>
 </div>
@@ -260,6 +268,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Stored the address of the <a class="el" href="classAbstractCell.html">AbstractCell</a> object <a class="el" href="classCell.html">Cell</a> handles. </p>
 
 </div>
 </div>
@@ -270,7 +279,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 25 2015 19:37:48 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 25 2015 19:43:46 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

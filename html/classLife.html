@@ -139,6 +139,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Reads input from user specified istream and builds the grid using that input. </p>
 
 </div>
 </div>
@@ -176,6 +177,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Print grid of the generation gen. </p>
 
 </div>
 </div>
@@ -202,6 +204,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Runs evolution until the current generation count, _g, reached the specified generation, specific_g. In this method, I will supply all neighboring cells to the evolving cell, and, depending on the type of the evolving cell, some neighbors' state will be ignore (i.e. Fredkin cell ignores the diagnols). The 8 neighboring cells will be pointed by an array of AbstractCell*, and their corresponding index looks like: 0 1 2 3 e 4 5 6 7 e being the evolving cell. Whenever a cell needs ite state changed, I put the address of that cell into a buffer (I'm using a vector of Abstract*), and, at the very end of an evolution, I shift the state of every cell in such buffer. By doing so, I no longer need to make a copy of the grid just to look at the state of each cell since it won't change until the end of evolution. </p>
 
 </div>
 </div>
@@ -247,6 +250,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Stored the world as a vector of vectors of user specified type. </p>
 
 </div>
 </div>
@@ -269,6 +273,7 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Population, as its name suggested, stored the current population in this grid. _g stored the current generation. </p>
 
 </div>
 </div>
@@ -278,7 +283,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 25 2015 19:37:48 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 25 2015 19:43:46 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

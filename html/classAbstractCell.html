@@ -135,6 +135,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initialize state as true/alive or false/dead depending on the input S. In fact, as long as the input is not '-' or '.', it will be consider as alive. </p>
 
 </div>
 </div>
@@ -160,6 +161,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>In Conway/Fredkin cell, evolve will look at the neighbors and return true if state change required, false otherwise. Since this is not a concrete class, I made this abstract (AKA pure virtual) to force the child class to implement this method. </p>
 
 <p>Implemented in <a class="el" href="classFredkinCell.html#a9963e2863d7608e93d142c6e021617cb">FredkinCell</a>, and <a class="el" href="classConwayCell.html#aed4db28910ff99e62ad028290ba5621b">ConwayCell</a>.</p>
 
@@ -185,6 +187,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>In Conway/Fredkin cell, get_state will return a char representing the current state for the each corresponding class. This is again an abstract method, since each child class might represent a live/dead cell differently. </p>
 
 <p>Implemented in <a class="el" href="classFredkinCell.html#ad86d13c33cabb71e24ecd3f796029ba1">FredkinCell</a>, and <a class="el" href="classConwayCell.html#a3454f93273f2e2299a2ebf27b646fc3e">ConwayCell</a>.</p>
 
@@ -202,6 +205,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Tells whether a cell is alive or not. Since that information is simply stored as a bool in state, I could just return the value of state. </p>
 
 </div>
 </div>
@@ -217,6 +221,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Simply shift the state of this cell. By separating the state shifting from <a class="el" href="classAbstractCell.html#ac2c599d61d1bafb09468b48204482f8b">evolve()</a>, I can iterate through the life grid only once and without making a copy of the grid. I'll explain this concept in detail in the description of run_evolution() in class <a class="el" href="classLife.html">Life</a>. </p>
 
 </div>
 </div>
@@ -238,6 +243,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Stored the alive/dead status of the cell. </p>
 
 </div>
 </div>
@@ -248,7 +254,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 25 2015 19:37:48 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 25 2015 19:43:46 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
