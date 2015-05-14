@@ -1,0 +1,2 @@
+No need to print Generation 10 in Life<ConwayCell> 109x69. Last output is incorrect. - 0.5
+lack of assertions -2
